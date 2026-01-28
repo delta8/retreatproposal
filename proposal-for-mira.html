@@ -1426,9 +1426,30 @@
       try {
         isLoadingFromSheet = true;
         showLoadingIndicator('Loading from Google Sheet...');
+        console.log('Fetching from Google Sheet...');
         
-        const response = await fetch(SCRIPT_URL);
-        const result = await response.json();
+        // Add timeout to prevent hanging
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+        
+        const response = await fetch(SCRIPT_URL, { 
+          signal: controller.signal,
+          redirect: 'follow'
+        });
+        clearTimeout(timeoutId);
+        
+        console.log('Response status:', response.status);
+        const text = await response.text();
+        console.log('Response text:', text.substring(0, 200));
+        
+        let result;
+        try {
+          result = JSON.parse(text);
+        } catch (parseError) {
+          console.error('Failed to parse JSON:', parseError);
+          hideLoadingIndicator();
+          return false;
+        }
         
         if (!result.success) {
           console.error('Failed to load from sheet:', result.error);
@@ -1437,6 +1458,7 @@
         }
         
         const data = result.data;
+        console.log('Loaded data keys:', Object.keys(data));
         
         // Load participants
         if (data.participants) {
@@ -2078,33 +2100,36 @@
     }
 
     // Initialize
-    document.addEventListener('DOMContentLoaded', async () => {
-      try {
-        // Clear any old localStorage data
-        localStorage.removeItem('retreatProposalState');
-        
-        // Priority: 1) URL state (for sharing specific configs), 2) Google Sheet (master), 3) Defaults
-        const hasUrlState = loadStateFromURL();
-        
-        if (!hasUrlState && SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-          // Try to load from Google Sheet only if configured
-          try {
-            await loadFromGoogleSheet();
-          } catch (e) {
-            console.log('Could not load from Google Sheet, using defaults:', e);
-          }
-        }
-      } catch (e) {
-        console.error('Error during initialization:', e);
-      }
+    document.addEventListener('DOMContentLoaded', () => {
+      // Clear any old localStorage data
+      localStorage.removeItem('retreatProposalState');
       
-      // Always render the page, even if loading failed
+      // Check for URL state first
+      const hasUrlState = loadStateFromURL();
+      
+      // ALWAYS render the page immediately with current/default values
       updateParticipantsDisplays();
       renderCostsTable();
       renderDiscountsSection();
       renderAccommodationsTable();
       updateCalculations();
       setupParticipantInputs();
+      
+      // Then try to load from Google Sheet in the background (non-blocking)
+      if (!hasUrlState && SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        loadFromGoogleSheet().then(loaded => {
+          if (loaded) {
+            // Re-render with loaded data
+            updateParticipantsDisplays();
+            renderCostsTable();
+            renderDiscountsSection();
+            renderAccommodationsTable();
+            updateCalculations();
+          }
+        }).catch(e => {
+          console.log('Google Sheet load failed, using defaults:', e);
+        });
+      }
     });
   </script>
 </body>
