@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retreat Proposal</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      font-size: 20px;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f5f1ed 0%, #ede8e3 100%);
+    }
+
+    .header {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid #d4c5b9;
+    }
+
+    .header-content {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    h1 {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 3.5rem;
+      color: #5a4a3a;
+      margin-bottom: 0.25rem;
+      font-weight: normal;
+    }
+
+    .subtitle {
+      font-size: 1.4rem;
+      color: #8b7859;
+    }
+
+    .links-section {
+      margin-top: 1rem;
+    }
+
+    .links-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #5a4a3a;
+      margin-bottom: 0.5rem;
+    }
+
+    .links-list {
+      list-style: disc;
+      margin-left: 1.25rem;
+      font-size: 1.2rem;
+    }
+
+    .links-list li {
+      margin-bottom: 0.25rem;
+      color: #5a4a3a;
+    }
+
+    .links-list a {
+      color: #8b7859;
+      text-decoration: underline;
+    }
+
+    .links-list a:hover {
+      color: #5a4a3a;
+    }
+
+    .links-list .no-link {
+      color: #8b7859;
+      font-style: italic;
+    }
+
+    .section-header-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .participants-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      background: #f5f1ed;
+      border: 1px solid #e8ddd2;
+    }
+
+    .participants-label {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #8b7859;
+      white-space: nowrap;
+    }
+
+    .participants-value {
+      font-family: Georgia, serif;
+      font-size: 1.4rem;
+      width: 3.5rem;
+      text-align: right;
+      color: #5a4a3a;
+    }
+
+    .participants-input {
+      width: 3.5rem;
+      text-align: right;
+      font-family: Georgia, serif;
+      font-size: 1.4rem;
+      border: none;
+      border-bottom: 1px solid #d4c5b9;
+      padding: 0.25rem 0;
+      background: transparent;
+      color: #5a4a3a;
+      outline: none;
+    }
+
+    .edit-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.25rem;
+      font-size: 1.15rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .edit-btn.view-mode {
+      background: #e8ddd2;
+      color: #5a4a3a;
+    }
+
+    .edit-btn.edit-mode {
+      background: #8b7859;
+      color: white;
+    }
+
+    .edit-btn:hover {
+      opacity: 0.9;
+    }
+
+    .reset-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.25rem;
+      font-size: 1.15rem;
+      border: 1px solid #d4c5b9;
+      background: white;
+      color: #8b7859;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: #faf8f5;
+    }
+
+    .pdf-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.25rem;
+      font-size: 1.15rem;
+      border: 1px solid #5a8a5a;
+      background: #5a8a5a;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .pdf-btn:hover {
+      background: #4a7a4a;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.25rem;
+      font-size: 1.15rem;
+      border: 1px solid #5a8a5a;
+      background: white;
+      color: #5a8a5a;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .link-btn:hover {
+      background: #f5f9f5;
+    }
+
+    .sheet-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.25rem;
+      font-size: 1.15rem;
+      border: 1px solid #4285f4;
+      background: #4285f4;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sheet-btn:hover {
+      background: #3367d6;
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        font-size: 9px !important;
+      }
+
+      .edit-btn, .reset-btn, .pdf-btn, .link-btn, .sheet-btn, .section-edit-btn {
+        display: none !important;
+      }
+
+      .participants-input {
+        display: none !important;
+      }
+
+      .participants-value {
+        display: block !important;
+      }
+
+      .links-section {
+        display: none !important;
+      }
+
+      .header {
+        border-bottom: 1px solid #d4c5b9 !important;
+      }
+
+      .header-content {
+        padding: 0.75rem 1rem !important;
+      }
+
+      h1 {
+        font-size: 1.25rem !important;
+        margin-bottom: 0.125rem !important;
+      }
+
+      .subtitle {
+        font-size: 0.65rem !important;
+      }
+
+      .main-content {
+        padding: 0.5rem 1rem !important;
+      }
+
+      section {
+        margin-bottom: 0.5rem !important;
+        page-break-inside: avoid;
+      }
+
+      .section-title {
+        font-size: 0.6rem !important;
+        margin-bottom: 0.25rem !important;
+      }
+
+      .section-header-row {
+        margin-bottom: 0.25rem !important;
+        gap: 0.5rem !important;
+      }
+
+      .participants-badge {
+        padding: 0.2rem 0.5rem !important;
+        gap: 0.25rem !important;
+      }
+
+      .participants-label {
+        font-size: 0.55rem !important;
+      }
+
+      .participants-value {
+        font-size: 0.65rem !important;
+        width: 2rem !important;
+      }
+
+      .table-container {
+        border: 1px solid #e8ddd2 !important;
+      }
+
+      .table-header {
+        padding: 0.25rem 0.5rem !important;
+        font-size: 0.55rem !important;
+      }
+
+      .table-row {
+        padding: 0.2rem 0.5rem !important;
+        border-bottom: 1px solid #e8ddd2 !important;
+        font-size: 0.6rem !important;
+      }
+
+      .cost-desc {
+        font-size: 0.6rem !important;
+      }
+
+      .cost-note {
+        font-size: 0.45rem !important;
+      }
+
+      .cost-value, .cost-per-person {
+        font-size: 0.6rem !important;
+      }
+
+      .people-count {
+        font-size: 0.55rem !important;
+      }
+
+      .discount-note {
+        font-size: 0.45rem !important;
+      }
+
+      .col-cost, .col-perperson {
+        width: 3.5rem !important;
+      }
+
+      .col-people {
+        width: 2.5rem !important;
+      }
+
+      .total-box {
+        margin-top: 0.25rem !important;
+        padding: 0.35rem 0.5rem !important;
+        background: #faf8f5 !important;
+        border: 1px solid #e8ddd2 !important;
+      }
+
+      .total-label {
+        font-size: 0.65rem !important;
+      }
+
+      .total-value {
+        font-size: 0.75rem !important;
+      }
+
+      .per-person-row {
+        font-size: 0.55rem !important;
+        margin-top: 0.15rem !important;
+      }
+
+      /* Accommodation table */
+      .col-acc-name {
+        font-size: 0.55rem !important;
+      }
+
+      .acc-name {
+        font-size: 0.55rem !important;
+      }
+
+      .acc-name-italic {
+        font-size: 0.5rem !important;
+      }
+
+      .col-acc-price, .col-acc-avg, .col-acc-total {
+        width: 3rem !important;
+        font-size: 0.55rem !important;
+      }
+
+      .col-acc-count {
+        width: 1.5rem !important;
+        font-size: 0.55rem !important;
+      }
+
+      .summary-row {
+        font-size: 0.55rem !important;
+      }
+
+      .sub-item-row .col-acc-name {
+        padding-left: 0.75rem !important;
+      }
+
+      .sub-item-row .acc-name {
+        font-size: 0.5rem !important;
+      }
+
+      .header-row {
+        background: #f5f1ed !important;
+      }
+
+      .last-sub-item-row {
+        border-bottom: 2px solid #d4c5b9 !important;
+      }
+
+      /* Revenue section */
+      .accordion-header {
+        padding: 0.35rem 0.5rem !important;
+        background: #faf8f5 !important;
+        border: 1px solid #e8ddd2 !important;
+        cursor: default;
+      }
+
+      .accordion-title {
+        font-size: 0.6rem !important;
+      }
+
+      .accordion-icon {
+        display: none !important;
+      }
+
+      .accordion-content {
+        display: block !important;
+        padding: 0.5rem !important;
+        border: 1px solid #e8ddd2 !important;
+        border-top: none !important;
+      }
+
+      .revenue-group {
+        margin-bottom: 0.5rem !important;
+      }
+
+      .revenue-subtitle {
+        font-size: 0.55rem !important;
+        margin-bottom: 0.2rem !important;
+      }
+
+      .revenue-box {
+        padding: 0.35rem 0.5rem !important;
+        border: 1px solid #8b7859 !important;
+        background: #faf8f5 !important;
+        min-width: unset !important;
+      }
+
+      .revenue-value {
+        font-size: 0.75rem !important;
+      }
+
+      .revenue-formula {
+        font-size: 0.5rem !important;
+      }
+
+      @page {
+        size: letter portrait;
+        margin: 0.35in;
+      }
+    }
+
+    .main-content {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-title {
+      font-family: Georgia, serif;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8b7859;
+      font-weight: normal;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title a {
+      color: #8b7859;
+      text-decoration: underline;
+    }
+
+    .table-container {
+      border-radius: 0.25rem;
+      overflow: hidden;
+      border: 1px solid #e8ddd2;
+      background: white;
+    }
+
+    .table-header {
+      display: flex;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #e8ddd2;
+      padding: 0.85rem;
+      background: #faf8f5;
+    }
+
+    .table-row {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      border-bottom: 1px solid #e8ddd2;
+      padding: 0.85rem;
+    }
+
+    .table-row:last-child {
+      border-bottom: none;
+    }
+
+    .table-row.edited-row {
+      background-color: #f0e6f6 !important;
+    }
+
+    .participants-badge.edited {
+      background-color: #f0e6f6 !important;
+    }
+
+    .col-desc {
+      flex: 1;
+      color: #8b7859;
+    }
+
+    .col-cost {
+      width: 7rem;
+      text-align: right;
+      color: #8b7859;
+    }
+
+    .col-perperson {
+      width: 7rem;
+      text-align: right;
+      color: #8b7859;
+    }
+
+    .col-people {
+      width: 6rem;
+      text-align: right;
+      color: #8b7859;
+    }
+
+    .cost-desc {
+      font-family: Georgia, serif;
+      color: #5a4a3a;
+    }
+
+    .cost-note {
+      color: #8b7859;
+      font-size: 0.95rem;
+      margin-top: 2px;
+    }
+
+    .cost-per-person {
+      color: #6b8b6b;
+      font-size: 1.1rem;
+      font-style: italic;
+      font-family: Georgia, serif;
+    }
+
+    .perperson-input {
+      color: #6b8b6b !important;
+      font-style: italic;
+    }
+
+    .people-input {
+      display: inline-block;
+    }
+
+    .cost-value {
+      font-family: Georgia, serif;
+      color: #5a4a3a;
+    }
+
+    .cost-input {
+      width: 100%;
+      text-align: right;
+      border: none;
+      border-bottom: 1px solid #d4c5b9;
+      padding: 0.25rem 0;
+      outline: none;
+      font-size: 1.1rem;
+    }
+
+    .people-count {
+      font-size: 1rem;
+      color: #8b7859;
+    }
+
+    .discount-note {
+      color: #8b7859;
+      font-size: 1rem;
+      margin-top: 2px;
+    }
+
+    .total-box {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 0.25rem;
+      background: #faf8f5;
+      border: 1px solid #e8ddd2;
+    }
+
+    .total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .total-label {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #5a4a3a;
+    }
+
+    .total-value {
+      font-size: 1.75rem;
+      font-family: Georgia, serif;
+      color: #5a4a3a;
+    }
+
+    .per-person-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1.1rem;
+      color: #8b7859;
+      margin-top: 0.5rem;
+    }
+
+    .per-person-value {
+      font-family: Georgia, serif;
+    }
+
+    /* Accommodation table */
+    .col-acc-name {
+      flex: 1;
+      color: #8b7859;
+    }
+
+    .col-acc-price {
+      width: 7rem;
+      text-align: right;
+      color: #8b7859;
+    }
+
+    .col-acc-avg {
+      width: 14rem;
+      text-align: right;
+      color: #8b7859;
+      white-space: nowrap;
+    }
+
+    .col-acc-count {
+      width: 5rem;
+      text-align: right;
+      color: #8b7859;
+    }
+
+    .col-acc-total {
+      width: 7rem;
+      text-align: right;
+      color: #8b7859;
+    }
+
+    .acc-name {
+      color: #5a4a3a;
+      font-size: 1.1rem;
+    }
+
+    .acc-name-bold {
+      font-weight: bold;
+    }
+
+    .acc-name-italic {
+      font-style: italic;
+      font-weight: normal;
+    }
+
+    .acc-value {
+      color: #5a4a3a;
+    }
+
+    .acc-input {
+      width: 100%;
+      text-align: right;
+      border: none;
+      border-bottom: 1px solid #d4c5b9;
+      padding: 0.25rem 0;
+      outline: none;
+      font-size: 1.1rem;
+    }
+
+    .byot-row {
+      background: #f5f1ed;
+    }
+
+    .summary-row {
+      background: #faf8f5;
+      font-weight: 600;
+    }
+
+    .summary-row .col-acc-name,
+    .summary-row .col-acc-price,
+    .summary-row .col-acc-count,
+    .summary-row .col-acc-total {
+      color: #5a4a3a;
+    }
+
+    .header-row {
+      background: #f5f1ed;
+      font-weight: 600;
+    }
+
+    .header-row .col-acc-name {
+      color: #5a4a3a;
+    }
+
+    .sub-item-row .col-acc-name {
+      padding-left: 1.5rem;
+    }
+
+    .sub-item-row .acc-name {
+      font-size: 0.95rem;
+    }
+
+    .last-sub-item-row {
+      border-bottom: 2px solid #d4c5b9 !important;
+    }
+
+    /* Revenue section */
+    .revenue-box {
+      display: inline-block;
+      min-width: 320px;
+      padding: 1rem 1.5rem;
+      border-radius: 0.25rem;
+      background: #faf8f5;
+      border: 2px solid #8b7859;
+    }
+
+    .revenue-inner {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .revenue-value {
+      font-size: 1.75rem;
+      font-family: Georgia, serif;
+      color: #5a4a3a;
+    }
+
+    .revenue-formula {
+      font-size: 1.1rem;
+      color: #8b7859;
+    }
+
+    .revenue-subtitle {
+      font-size: 1.1rem;
+      color: #5a4a3a;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .revenue-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .revenue-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .revenue-group-secondary {
+      margin-top: 1rem;
+    }
+
+    .revenue-subtitle-small {
+      font-size: 0.9rem;
+      color: #8b7859;
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+
+    .revenue-box-small {
+      display: inline-block;
+      min-width: 280px;
+      padding: 0.75rem 1.25rem;
+      border-radius: 0.25rem;
+      background: #faf8f5;
+      border: 1px solid #8b7859;
+    }
+
+    .revenue-value-small {
+      font-size: 1.25rem;
+      font-family: Georgia, serif;
+      color: #5a4a3a;
+    }
+
+    .revenue-formula-small {
+      font-size: 0.85rem;
+      color: #8b7859;
+    }
+
+    /* Accordion styles */
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      background: #faf8f5;
+      border: 1px solid #e8ddd2;
+      border-radius: 0.25rem;
+      margin-bottom: 0;
+      transition: all 0.2s;
+    }
+
+    .accordion-header:hover {
+      background: #f5f1ed;
+    }
+
+    .accordion-header.open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      margin-bottom: 0;
+    }
+
+    .accordion-title {
+      font-family: Georgia, serif;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8b7859;
+      font-weight: normal;
+    }
+
+    .accordion-icon {
+      width: 20px;
+      height: 20px;
+      color: #8b7859;
+      transition: transform 0.2s;
+    }
+
+    .accordion-header.open .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 1rem;
+      border: 1px solid #e8ddd2;
+      border-top: none;
+      border-bottom-left-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
+      background: white;
+    }
+
+    .accordion-content.open {
+      display: block;
+    }
+
+    /* Edit icon SVG */
+    .edit-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .revenue-box {
+        width: 100%;
+        min-width: unset;
+      }
+
+      .table-row, .table-header {
+        font-size: 0.75rem;
+      }
+
+      .col-cost, .col-acc-price, .col-perperson {
+        width: 4rem;
+      }
+
+      .col-people, .col-acc-avg, .col-acc-count {
+        width: 3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div>
+        <h1>Retreat Proposal</h1>
+        <p class="subtitle">Interactive pricing model</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Operating Costs Section -->
+    <section>
+      <h2 class="section-title">Retreat Operating Costs</h2>
+      <div class="section-header-row">
+        <div class="participants-badge">
+          <span class="participants-label">Participants:</span>
+          <span class="participants-value section-participants-view">25</span>
+          <input type="number" class="participants-input section-participants-edit" value="25" style="display: none;">
+        </div>
+        <button class="edit-btn view-mode" id="main-edit-btn" onclick="toggleEditMode()">
+          <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+          </svg>
+          <span id="edit-btn-text">Edit</span>
+        </button>
+        <button class="reset-btn" onclick="resetToOriginal()">
+          <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          <span>Reset</span>
+        </button>
+        <button class="pdf-btn" onclick="saveAsPDF()">
+          <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="15" y2="15"></line>
+          </svg>
+          <span>Save as PDF</span>
+        </button>
+        <button class="link-btn" onclick="copyShareableLink()">
+          <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+          <span>Copy Link</span>
+        </button>
+        <button class="sheet-btn" onclick="saveToGoogleSheet()">
+          <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <line x1="10" y1="9" x2="8" y2="9"></line>
+          </svg>
+          <span>Save to Sheet</span>
+        </button>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header">
+          <div class="col-desc">Description</div>
+          <div class="col-cost">Cost</div>
+          <div class="col-perperson">Per Person</div>
+          <div class="col-people">People</div>
+        </div>
+        <div id="costs-table"></div>
+        <div id="discounts-section"></div>
+      </div>
+
+      <div class="total-box">
+        <div class="total-row">
+          <span class="total-label">Total Cost</span>
+          <span class="total-value" id="total-cost">$0</span>
+        </div>
+        <div class="per-person-row">
+          <span>Per Person</span>
+          <span class="per-person-value" id="per-person-cost">$0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accommodations Section -->
+    <section>
+      <h2 class="section-title">
+        <a href="https://www.spirit.camp/rental-guide" target="_blank" rel="noopener noreferrer">Accommodation Options</a>
+      </h2>
+      <div class="section-header-row">
+        <div class="participants-badge">
+          <span class="participants-label">Participants:</span>
+          <span class="participants-value section-participants-view">25</span>
+          <input type="number" class="participants-input section-participants-edit" value="25" style="display: none;">
+        </div>
+        <button class="edit-btn view-mode section-edit-btn" onclick="toggleEditMode()">
+          <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+          </svg>
+          <span>Edit</span>
+        </button>
+        <button class="reset-btn" onclick="resetToOriginal()">
+          <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+          </svg>
+          <span>Reset</span>
+        </button>
+      </div>
+
+      <div class="table-container">
+        <div class="table-header">
+          <div class="col-acc-name">Accommodation</div>
+          <div class="col-acc-price">Price</div>
+          <div class="col-acc-avg">Average</div>
+          <div class="col-acc-count">Count</div>
+          <div class="col-acc-total">Total</div>
+        </div>
+        <div id="accommodations-table"></div>
+        <div class="table-row summary-row" id="acc-summary-row">
+          <div class="col-acc-name">Average</div>
+          <div class="col-acc-price" id="avg-price">$0</div>
+          <div class="col-acc-avg"></div>
+          <div class="col-acc-count" id="total-count">0</div>
+          <div class="col-acc-total" id="total-revenue">$0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Revenue Section -->
+    <section>
+      <div class="accordion-header open" onclick="toggleAccordion(this)">
+        <span class="accordion-title">Estimated Revenue</span>
+        <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+      <div class="accordion-content open">
+        <div class="section-header-row" style="margin-bottom: 1rem;">
+          <div class="participants-badge">
+            <span class="participants-label">Participants:</span>
+            <span class="participants-value section-participants-view">25</span>
+            <input type="number" class="participants-input section-participants-edit" value="25" style="display: none;">
+          </div>
+          <button class="edit-btn view-mode section-edit-btn" onclick="toggleEditMode()">
+            <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+            </svg>
+            <span>Edit</span>
+          </button>
+          <button class="reset-btn" onclick="resetToOriginal()">
+            <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+              <path d="M3 3v5h5"></path>
+            </svg>
+            <span>Reset</span>
+          </button>
+        </div>
+
+        <div class="revenue-group">
+          <p class="revenue-subtitle">Based on Accommodation Selections</p>
+          <div class="revenue-box">
+            <div class="revenue-inner">
+              <span class="revenue-value" id="estimated-revenue-acc">$0</span>
+              <span class="revenue-formula" id="revenue-formula-acc"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="revenue-group revenue-group-secondary">
+          <p class="revenue-subtitle-small">Based on # of Participants @ Average Cost <span style="font-weight: normal;">(avg/acc − weighted avg = <span id="avg-diff-formula"></span>)</span></p>
+          <div class="revenue-box-small">
+            <div class="revenue-inner">
+              <span class="revenue-value-small" id="estimated-revenue">$0</span>
+              <span class="revenue-formula-small" id="revenue-formula"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ========== GOOGLE SHEETS CONFIGURATION ==========
+    // Replace this URL with your Google Apps Script Web App URL after deployment
+    const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+    
+    // ========== STATE ==========
+    let editMode = false;
+    let totalParticipants = 25;
+    let isLoadingFromSheet = false;
+    
+    // Track edited fields
+    const editedFields = {
+      participants: false,
+      costs: {},
+      discounts: {},
+      accommodations: {}
+    };
+
+    // Original values for reset
+    const originalParticipants = 25;
+
+    const originalCosts = {
+      venue: { desc: 'Venue (Julian)', note: '', amount: 20000 },
+      catering: { desc: 'Chef (Simone)', note: '20-24 = $80, 25-29 = $75, 30+ = $70/per person per day', amount: 13125, isChef: true },
+      insurance: { desc: 'Liability Insurance', note: '', amount: 250 },
+      santaRosaTransfer: { desc: 'Transfer Cost (Alex)', note: 'round trip from Santa Rosa $120/person rt', amount: 3000, isTransfer: true, transferPct: 1.0, perPersonRate: 120 },
+      extras: { desc: 'Extra (sauna)', note: '', amount: 1200 },
+      goodies: { desc: 'Retreat Goodies', note: '$50/person', amount: 1250, isGoodies: true },
+      planeTickets: { desc: 'M/J/E Plane Tickets', note: 'assuming $600 per person', amount: 1800, peopleType: 'fixed-3' }
+    };
+
+    const originalDiscountRates = {
+      earlyBirdPct: 0.70,
+      repeatPct: 0.57,
+      discountAmount: 100
+    };
+
+    const originalAccommodations = [
+      { name: "Queen's Comb*", desc: "Queen bed, sleeps 1-2", price: 3400, count: 1 },
+      { name: "Couple", desc: "", price: 2800, count: 0, isSubItem: true },
+      { name: "Nectar Nook", desc: "Private cozy room with single bed and desk, sleeps 1", price: 3200, count: 1 },
+      { name: "Group Cabins", desc: "", price: null, count: null, isHeader: true },
+      { name: "Fox Den*", desc: "Shared cabin with 2 queens, 2 twin beds, and vaulted ceiling with sky lights. Closest cabin to bathrooms. Sleeps 2-6", price: 2500, count: 5, isSubItem: true },
+      { name: "Raven Roost*", desc: "Shared cabin with 2 queens, 2 twin beds, and garden views. Closest cabin to the Lodge. Sleeps 2-6", price: 2500, count: 5, isSubItem: true },
+      { name: "Deer Haven*", desc: "Shared cabin with 2 queen beds, 1 twin bed, desk, and sunny deck with adirondack chairs. Sleeps 2-5", price: 2500, count: 4, isSubItem: true, isLastSubItem: true },
+      { name: "Bumble Bunkhouse*", desc: "Largest cabin with 2 bunks and 5 twin beds OR 1 twin and 2 kings. Sleeps up to 9", price: 2200, count: 6 },
+      { name: "Single Luxe Tent*", desc: "Solo luxe tent with king bed, electric blanket, overhead lighting and electricity", price: 2800, count: 3, maxCount: 3 },
+      { name: "Single Bell Tent*", desc: "Luxe Glamping Tent with king. Includes wool blanket, camping chair, luggage rack, bedside table, lantern", price: 2400, count: 0, maxCount: 7 }
+    ];
+
+    const costs = {
+      venue: { desc: 'Venue (Julian)', note: '', amount: 20000 },
+      catering: { desc: 'Chef (Simone)', note: '20-24 = $80, 25-29 = $75, 30+ = $70/per person per day', amount: 13125, isChef: true },
+      insurance: { desc: 'Liability Insurance', note: '', amount: 250 },
+      santaRosaTransfer: { desc: 'Transfer Cost (Alex)', note: 'round trip from Santa Rosa $120/person rt', amount: 3000, isTransfer: true, transferPct: 1.0, perPersonRate: 120 },
+      extras: { desc: 'Extra (sauna)', note: '', amount: 1200 },
+      goodies: { desc: 'Retreat Goodies', note: '$50/person', amount: 1250, isGoodies: true },
+      planeTickets: { desc: 'M/J/E Plane Tickets', note: 'assuming $600 per person', amount: 1800, peopleType: 'fixed-3' }
+    };
+
+    const discountRates = {
+      earlyBirdPct: 0.70,
+      repeatPct: 0.57,
+      discountAmount: 100
+    };
+
+    const accommodations = [
+      { name: "Queen's Comb*", desc: "Queen bed, sleeps 1-2", price: 3400, count: 1 },
+      { name: "Couple", desc: "", price: 2800, count: 0, isSubItem: true },
+      { name: "Nectar Nook", desc: "Private cozy room with single bed and desk, sleeps 1", price: 3200, count: 1 },
+      { name: "Group Cabins", desc: "", price: null, count: null, isHeader: true },
+      { name: "Fox Den*", desc: "Shared cabin with 2 queens, 2 twin beds, and vaulted ceiling with sky lights. Closest cabin to bathrooms. Sleeps 2-6", price: 2500, count: 5, isSubItem: true },
+      { name: "Raven Roost*", desc: "Shared cabin with 2 queens, 2 twin beds, and garden views. Closest cabin to the Lodge. Sleeps 2-6", price: 2500, count: 5, isSubItem: true },
+      { name: "Deer Haven*", desc: "Shared cabin with 2 queen beds, 1 twin bed, desk, and sunny deck with adirondack chairs. Sleeps 2-5", price: 2500, count: 4, isSubItem: true, isLastSubItem: true },
+      { name: "Bumble Bunkhouse*", desc: "Largest cabin with 2 bunks and 5 twin beds OR 1 twin and 2 kings. Sleeps up to 9", price: 2200, count: 6 },
+      { name: "Single Luxe Tent*", desc: "Solo luxe tent with king bed, electric blanket, overhead lighting and electricity", price: 2800, count: 3, maxCount: 3 },
+      { name: "Single Bell Tent*", desc: "Luxe Glamping Tent with king. Includes wool blanket, camping chair, luggage rack, bedside table, lantern", price: 2400, count: 0, maxCount: 7 }
+    ];
+
+    // Accordion toggle function
+    function toggleAccordion(header) {
+      header.classList.toggle('open');
+      const content = header.nextElementSibling;
+      content.classList.toggle('open');
+    }
+
+    // Save as PDF function
+    function saveAsPDF() {
+      window.print();
+    }
+
+    // Save state to localStorage
+    function saveState() {
+      const state = {
+        totalParticipants: totalParticipants,
+        costs: costs,
+        discountRates: discountRates,
+        accommodations: accommodations
+      };
+      localStorage.setItem('retreatProposalState', JSON.stringify(state));
+      alert('Changes saved! Your data will be available when you return.');
+    }
+
+    // Load state from localStorage
+    function loadState() {
+      const savedState = localStorage.getItem('retreatProposalState');
+      if (savedState) {
+        try {
+          const state = JSON.parse(savedState);
+          totalParticipants = state.totalParticipants || originalParticipants;
+          
+          // Restore costs
+          if (state.costs) {
+            Object.keys(state.costs).forEach(key => {
+              if (costs[key]) {
+                costs[key].amount = state.costs[key].amount;
+                if (state.costs[key].customPeople !== undefined) {
+                  costs[key].customPeople = state.costs[key].customPeople;
+                }
+                if (state.costs[key].transferPct !== undefined) {
+                  costs[key].transferPct = state.costs[key].transferPct;
+                }
+              }
+            });
+          }
+          
+          // Restore discount rates
+          if (state.discountRates) {
+            discountRates.earlyBirdPct = state.discountRates.earlyBirdPct;
+            discountRates.repeatPct = state.discountRates.repeatPct;
+            discountRates.discountAmount = state.discountRates.discountAmount;
+          }
+          
+          // Restore accommodations
+          if (state.accommodations) {
+            state.accommodations.forEach((acc, idx) => {
+              if (accommodations[idx]) {
+                accommodations[idx].price = acc.price;
+                accommodations[idx].count = acc.count;
+              }
+            });
+          }
+          
+          return true;
+        } catch (e) {
+          console.error('Error loading saved state:', e);
+          return false;
+        }
+      }
+      return false;
+    }
+
+    // Export state to JSON file for cross-device use
+    function exportState() {
+      const state = {
+        totalParticipants: totalParticipants,
+        costs: costs,
+        discountRates: discountRates,
+        accommodations: accommodations,
+        exportDate: new Date().toISOString()
+      };
+      const dataStr = JSON.stringify(state, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'retreat-proposal-settings.json';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    // Import state from JSON file
+    function importState(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const state = JSON.parse(e.target.result);
+          
+          // Restore participants
+          totalParticipants = state.totalParticipants || originalParticipants;
+          
+          // Restore costs
+          if (state.costs) {
+            Object.keys(state.costs).forEach(key => {
+              if (costs[key]) {
+                costs[key].amount = state.costs[key].amount;
+                if (state.costs[key].customPeople !== undefined) {
+                  costs[key].customPeople = state.costs[key].customPeople;
+                }
+                if (state.costs[key].transferPct !== undefined) {
+                  costs[key].transferPct = state.costs[key].transferPct;
+                }
+              }
+            });
+          }
+          
+          // Restore discount rates
+          if (state.discountRates) {
+            discountRates.earlyBirdPct = state.discountRates.earlyBirdPct;
+            discountRates.repeatPct = state.discountRates.repeatPct;
+            discountRates.discountAmount = state.discountRates.discountAmount;
+          }
+          
+          // Restore accommodations
+          if (state.accommodations) {
+            state.accommodations.forEach((acc, idx) => {
+              if (accommodations[idx]) {
+                accommodations[idx].price = acc.price;
+                accommodations[idx].count = acc.count;
+              }
+            });
+          }
+          
+          // Update displays
+          updateParticipantsDisplays();
+          renderCostsTable();
+          renderDiscountsSection();
+          renderAccommodationsTable();
+          updateCalculations();
+          
+          // Also save to localStorage
+          localStorage.setItem('retreatProposalState', JSON.stringify(state));
+          
+          alert('Settings imported successfully!');
+        } catch (err) {
+          alert('Error importing file: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+      
+      // Reset file input so same file can be imported again
+      event.target.value = '';
+    }
+
+    // Encode state to URL parameter
+    function encodeStateToURL() {
+      const state = {
+        p: totalParticipants,
+        c: Object.keys(costs).map(k => ({
+          a: costs[k].amount,
+          cp: costs[k].customPeople,
+          tp: costs[k].transferPct
+        })),
+        d: [discountRates.earlyBirdPct, discountRates.repeatPct, discountRates.discountAmount],
+        ac: accommodations.filter(a => !a.isHeader).map(a => ({ pr: a.price, ct: a.count })),
+        // Include edited state
+        ed: {
+          p: editedFields.participants,
+          c: editedFields.costs,
+          d: editedFields.discounts,
+          ac: editedFields.accommodations
+        }
+      };
+      return btoa(JSON.stringify(state));
+    }
+
+    // Decode state from URL parameter
+    function decodeStateFromURL(encoded) {
+      try {
+        const state = JSON.parse(atob(encoded));
+        
+        // Restore participants
+        totalParticipants = state.p || originalParticipants;
+        
+        // Restore costs
+        const costKeys = Object.keys(costs);
+        if (state.c) {
+          state.c.forEach((c, idx) => {
+            if (costKeys[idx] && costs[costKeys[idx]]) {
+              costs[costKeys[idx]].amount = c.a;
+              if (c.cp !== undefined) costs[costKeys[idx]].customPeople = c.cp;
+              if (c.tp !== undefined) costs[costKeys[idx]].transferPct = c.tp;
+            }
+          });
+        }
+        
+        // Restore discount rates
+        if (state.d) {
+          discountRates.earlyBirdPct = state.d[0];
+          discountRates.repeatPct = state.d[1];
+          discountRates.discountAmount = state.d[2];
+        }
+        
+        // Restore accommodations (skip headers)
+        if (state.ac) {
+          let acIdx = 0;
+          accommodations.forEach((acc, idx) => {
+            if (!acc.isHeader && state.ac[acIdx]) {
+              accommodations[idx].price = state.ac[acIdx].pr;
+              accommodations[idx].count = state.ac[acIdx].ct;
+              acIdx++;
+            }
+          });
+        }
+        
+        // Restore edited state
+        if (state.ed) {
+          editedFields.participants = state.ed.p || false;
+          editedFields.costs = state.ed.c || {};
+          editedFields.discounts = state.ed.d || {};
+          editedFields.accommodations = state.ed.ac || {};
+        }
+        
+        return true;
+      } catch (e) {
+        console.error('Error decoding URL state:', e);
+        return false;
+      }
+    }
+
+    // Copy shareable link to clipboard
+    function copyShareableLink() {
+      const encoded = encodeStateToURL();
+      const url = window.location.origin + window.location.pathname + '?state=' + encoded;
+      navigator.clipboard.writeText(url).then(() => {
+        alert('Link copied to clipboard! Share this URL to load these exact settings.');
+      }).catch(() => {
+        // Fallback for older browsers
+        prompt('Copy this link:', url);
+      });
+    }
+
+    // Check URL for state on load
+    function loadStateFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      const stateParam = params.get('state');
+      if (stateParam) {
+        return decodeStateFromURL(stateParam);
+      }
+      return false;
+    }
+
+    // ========== GOOGLE SHEETS INTEGRATION ==========
+    
+    // Load data from Google Sheet
+    async function loadFromGoogleSheet() {
+      if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        console.log('Google Sheets not configured - using defaults');
+        return false;
+      }
+      
+      try {
+        isLoadingFromSheet = true;
+        showLoadingIndicator('Loading from Google Sheet...');
+        
+        const response = await fetch(SCRIPT_URL);
+        const result = await response.json();
+        
+        if (!result.success) {
+          console.error('Failed to load from sheet:', result.error);
+          hideLoadingIndicator();
+          return false;
+        }
+        
+        const data = result.data;
+        
+        // Load participants
+        if (data.participants) {
+          totalParticipants = parseFloat(data.participants.value) || 25;
+        }
+        
+        // Load discount rates
+        if (data.earlyBirdPct) discountRates.earlyBirdPct = parseFloat(data.earlyBirdPct.value);
+        if (data.repeatPct) discountRates.repeatPct = parseFloat(data.repeatPct.value);
+        if (data.discountAmount) discountRates.discountAmount = parseFloat(data.discountAmount.value);
+        
+        // Load costs
+        if (data.cost_venue) costs.venue.amount = parseFloat(data.cost_venue.value);
+        if (data.cost_catering) costs.catering.amount = parseFloat(data.cost_catering.value);
+        if (data.cost_insurance) costs.insurance.amount = parseFloat(data.cost_insurance.value);
+        if (data.cost_transfer) {
+          costs.santaRosaTransfer.amount = parseFloat(data.cost_transfer.value);
+          if (data.cost_transfer.extra1 !== null) costs.santaRosaTransfer.transferPct = parseFloat(data.cost_transfer.extra1);
+          if (data.cost_transfer.extra2 !== null) costs.santaRosaTransfer.perPersonRate = parseFloat(data.cost_transfer.extra2);
+        }
+        if (data.cost_extras) costs.extras.amount = parseFloat(data.cost_extras.value);
+        if (data.cost_goodies) costs.goodies.amount = parseFloat(data.cost_goodies.value);
+        if (data.cost_planeTickets) costs.planeTickets.amount = parseFloat(data.cost_planeTickets.value);
+        
+        // Load accommodations
+        const accMapping = {
+          'acc_queenscomb': 0,
+          'acc_couple': 1,
+          'acc_nectarnook': 2,
+          // Skip index 3 - it's the "Group Cabins" header
+          'acc_foxden': 4,
+          'acc_ravenroost': 5,
+          'acc_deerhaven': 6,
+          'acc_bumblebunkhouse': 7,
+          'acc_singleluxetent': 8,
+          'acc_singlebelltent': 9
+        };
+        
+        for (const [key, idx] of Object.entries(accMapping)) {
+          if (data[key]) {
+            accommodations[idx].price = parseFloat(data[key].value);
+            if (data[key].extra1 !== null) {
+              accommodations[idx].count = parseInt(data[key].extra1);
+            }
+          }
+        }
+        
+        hideLoadingIndicator();
+        isLoadingFromSheet = false;
+        return true;
+        
+      } catch (error) {
+        console.error('Error loading from Google Sheet:', error);
+        hideLoadingIndicator();
+        isLoadingFromSheet = false;
+        return false;
+      }
+    }
+    
+    // Save data to Google Sheet
+    async function saveToGoogleSheet() {
+      if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        alert('Google Sheets not configured. Please set up the SCRIPT_URL in the code.');
+        return false;
+      }
+      
+      try {
+        showLoadingIndicator('Saving to Google Sheet...');
+        
+        const updates = {
+          participants: { value: totalParticipants },
+          earlyBirdPct: { value: discountRates.earlyBirdPct },
+          repeatPct: { value: discountRates.repeatPct },
+          discountAmount: { value: discountRates.discountAmount },
+          cost_venue: { value: costs.venue.amount },
+          cost_catering: { value: costs.catering.amount },
+          cost_insurance: { value: costs.insurance.amount },
+          cost_transfer: { 
+            value: costs.santaRosaTransfer.amount,
+            extra1: costs.santaRosaTransfer.transferPct,
+            extra2: costs.santaRosaTransfer.perPersonRate
+          },
+          cost_extras: { value: costs.extras.amount },
+          cost_goodies: { value: costs.goodies.amount },
+          cost_planeTickets: { value: costs.planeTickets.amount },
+          acc_queenscomb: { value: accommodations[0].price, extra1: accommodations[0].count },
+          acc_couple: { value: accommodations[1].price, extra1: accommodations[1].count },
+          acc_nectarnook: { value: accommodations[2].price, extra1: accommodations[2].count },
+          acc_foxden: { value: accommodations[4].price, extra1: accommodations[4].count },
+          acc_ravenroost: { value: accommodations[5].price, extra1: accommodations[5].count },
+          acc_deerhaven: { value: accommodations[6].price, extra1: accommodations[6].count },
+          acc_bumblebunkhouse: { value: accommodations[7].price, extra1: accommodations[7].count },
+          acc_singleluxetent: { value: accommodations[8].price, extra1: accommodations[8].count },
+          acc_singlebelltent: { value: accommodations[9].price, extra1: accommodations[9].count }
+        };
+        
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ updates })
+        });
+        
+        const result = await response.json();
+        
+        hideLoadingIndicator();
+        
+        if (result.success) {
+          // Clear edited highlights after successful save
+          editedFields.participants = false;
+          editedFields.costs = {};
+          editedFields.discounts = {};
+          editedFields.accommodations = {};
+          
+          // Re-render to remove highlights
+          updateParticipantsDisplays();
+          renderCostsTable();
+          renderDiscountsSection();
+          renderAccommodationsTable();
+          
+          alert('Saved to Google Sheet successfully!');
+          return true;
+        } else {
+          alert('Failed to save: ' + result.error);
+          return false;
+        }
+        
+      } catch (error) {
+        hideLoadingIndicator();
+        alert('Error saving to Google Sheet: ' + error.message);
+        return false;
+      }
+    }
+    
+    // Loading indicator helpers
+    function showLoadingIndicator(message) {
+      let indicator = document.getElementById('loading-indicator');
+      if (!indicator) {
+        indicator = document.createElement('div');
+        indicator.id = 'loading-indicator';
+        indicator.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 20px 40px; border-radius: 8px; z-index: 9999; font-family: system-ui;';
+        document.body.appendChild(indicator);
+      }
+      indicator.textContent = message || 'Loading...';
+      indicator.style.display = 'block';
+    }
+    
+    function hideLoadingIndicator() {
+      const indicator = document.getElementById('loading-indicator');
+      if (indicator) indicator.style.display = 'none';
+    }
+
+    // Reset function - reloads from Google Sheet or falls back to defaults
+    async function resetToOriginal() {
+      // Clear all edited flags first
+      editedFields.participants = false;
+      editedFields.costs = {};
+      editedFields.discounts = {};
+      editedFields.accommodations = {};
+      
+      // Try to reload from Google Sheet
+      if (SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+        const loaded = await loadFromGoogleSheet();
+        if (loaded) {
+          updateParticipantsDisplays();
+          renderCostsTable();
+          renderDiscountsSection();
+          renderAccommodationsTable();
+          updateCalculations();
+          return;
+        }
+      }
+      
+      // Fall back to hardcoded defaults
+      totalParticipants = originalParticipants;
+      
+      // Reset costs
+      Object.keys(costs).forEach(key => {
+        costs[key].amount = originalCosts[key].amount;
+        delete costs[key].customPeople; // Clear any custom people counts
+        // Reset transfer percentages
+        if (costs[key].isTransfer) {
+          costs[key].transferPct = originalCosts[key].transferPct;
+        }
+      });
+      
+      // Recalculate goodies based on participants
+      costs.goodies.amount = totalParticipants * 50;
+      
+      // Recalculate chef cost based on participants
+      const chefRate = getChefPerPersonRate();
+      costs.catering.amount = chefRate * totalParticipants * 7;
+      
+      // Recalculate transfer costs
+      Object.keys(costs).forEach(key => {
+        if (costs[key].isTransfer) {
+          const people = Math.round(totalParticipants * costs[key].transferPct);
+          costs[key].amount = people * costs[key].perPersonRate;
+        }
+      });
+      
+      // Reset discount rates
+      discountRates.earlyBirdPct = originalDiscountRates.earlyBirdPct;
+      discountRates.repeatPct = originalDiscountRates.repeatPct;
+      discountRates.discountAmount = originalDiscountRates.discountAmount;
+      
+      // Reset accommodations
+      accommodations.forEach((acc, idx) => {
+        acc.price = originalAccommodations[idx].price;
+        acc.count = originalAccommodations[idx].count;
+      });
+      
+      // Update displays
+      updateParticipantsDisplays();
+      renderCostsTable();
+      renderDiscountsSection();
+      renderAccommodationsTable();
+      updateCalculations();
+    }
+
+    // Helper functions
+    function getPeopleCount(costKey) {
+      const cost = costs[costKey];
+      // Use custom people count if set
+      if (cost.customPeople !== undefined) return cost.customPeople;
+      // Use transfer percentage if it's a transfer cost
+      if (cost.isTransfer) return Math.round(totalParticipants * cost.transferPct);
+      if (cost.peopleType === 'half-floor') return Math.floor(totalParticipants / 2);
+      if (cost.peopleType === 'half-ceil') return Math.ceil(totalParticipants / 2);
+      if (cost.peopleType === 'fixed-3') return 3;
+      return totalParticipants;
+    }
+
+    function formatCurrency(num) {
+      return '$' + num.toLocaleString();
+    }
+
+    function calculateTotals() {
+      const grossCost = Object.values(costs).reduce((sum, cost) => sum + cost.amount, 0);
+      const earlyBirdCost = Math.round(totalParticipants * discountRates.earlyBirdPct * discountRates.discountAmount);
+      const repeatCost = Math.round(totalParticipants * discountRates.repeatPct * discountRates.discountAmount);
+      const totalCostWithDiscounts = grossCost + earlyBirdCost + repeatCost;
+
+      // Exclude headers and Couple from simple average calculation (8 accommodation types)
+      const validAccommodations = accommodations.filter(a => a.price !== null && !a.isHeader && a.name !== 'Couple');
+      const avgAccommodation = validAccommodations.length > 0 
+        ? validAccommodations.reduce((sum, a) => sum + a.price, 0) / validAccommodations.length 
+        : 0;
+      
+      // Exclude headers from revenue/count calculations
+      const nonHeaderAccommodations = accommodations.filter(a => !a.isHeader);
+      const totalAccommodationRevenue = nonHeaderAccommodations.reduce((sum, a) => sum + (a.price && a.count ? a.price * a.count : 0), 0);
+      const totalAccommodationCount = nonHeaderAccommodations.reduce((sum, a) => sum + (a.count || 0), 0);
+      
+      // Weighted average = total revenue / total people slotted
+      const weightedAvgAccommodation = totalAccommodationCount > 0 
+        ? totalAccommodationRevenue / totalAccommodationCount 
+        : 0;
+      
+      const estimatedRevenue = Math.round((avgAccommodation * totalParticipants) - totalCostWithDiscounts);
+      const estimatedRevenueByAccommodation = totalAccommodationRevenue - totalCostWithDiscounts;
+
+      return {
+        grossCost,
+        earlyBirdCost,
+        repeatCost,
+        totalCostWithDiscounts,
+        avgAccommodation,
+        weightedAvgAccommodation,
+        totalAccommodationRevenue,
+        totalAccommodationCount,
+        estimatedRevenue,
+        estimatedRevenueByAccommodation
+      };
+    }
+
+    // Helper function for chef per person rate
+    function getChefPerPersonRate() {
+      if (totalParticipants < 25) return 80;
+      if (totalParticipants < 30) return 75;
+      return 70;
+    }
+
+    // Render functions
+    function renderCostsTable() {
+      const container = document.getElementById('costs-table');
+      container.innerHTML = '';
+
+      Object.entries(costs).forEach(([key, cost]) => {
+        const people = getPeopleCount(key);
+        let costPerPerson;
+        let displayPeople;
+        let isFixedPerPerson = false;
+        
+        // Special handling for Chef row
+        if (cost.isChef) {
+          costPerPerson = getChefPerPersonRate().toFixed(2);
+          displayPeople = people;
+          isFixedPerPerson = true;
+        } else if (cost.isGoodies) {
+          costPerPerson = '50.00';
+          displayPeople = people;
+          isFixedPerPerson = true;
+        } else if (cost.isTransfer) {
+          costPerPerson = cost.perPersonRate.toFixed(2);
+          displayPeople = people;
+          isFixedPerPerson = true; // Per person rate is fixed at $120 or $190
+        } else {
+          costPerPerson = (cost.amount / people).toFixed(2);
+          displayPeople = people;
+        }
+        
+        const row = document.createElement('div');
+        row.className = 'table-row' + (editedFields.costs[key] ? ' edited-row' : '');
+        
+        // Different handling for transfer rows - show percentage input
+        let peopleColContent;
+        if (cost.isTransfer && editMode) {
+          const pctValue = (cost.transferPct * 100).toFixed(0);
+          peopleColContent = `<span class="people-count"><input type="number" step="1" min="0" max="100" class="cost-input transfer-pct-input" value="${pctValue}" data-cost-key="${key}" data-field="transferPct" style="width: 2.5rem; text-align: center;">%</span>`;
+        } else if (editMode && !isFixedPerPerson) {
+          peopleColContent = `<span class="people-count"><input type="number" class="cost-input people-input" value="${people}" data-cost-key="${key}" data-field="people" style="width: 2.5rem; text-align: center;">/${totalParticipants}</span>`;
+        } else {
+          peopleColContent = `<span class="people-count">${displayPeople}/${totalParticipants}</span>`;
+        }
+        
+        row.innerHTML = `
+          <div class="col-desc">
+            <p class="cost-desc">${cost.desc}</p>
+            ${cost.note ? `<p class="cost-note">${cost.note}</p>` : ''}
+          </div>
+          <div class="col-cost">
+            ${editMode && !cost.isGoodies && !cost.isTransfer
+              ? `<input type="number" class="cost-input" value="${cost.amount}" data-cost-key="${key}" data-field="amount">`
+              : `<span class="cost-value">${formatCurrency(cost.amount)}</span>`
+            }
+          </div>
+          <div class="col-perperson">
+            ${editMode && !isFixedPerPerson
+              ? `<input type="number" step="0.01" class="cost-input perperson-input" value="${costPerPerson}" data-cost-key="${key}" data-field="perperson">`
+              : `<span class="cost-per-person">$${costPerPerson}</span>`
+            }
+          </div>
+          <div class="col-people">
+            ${peopleColContent}
+          </div>
+        `;
+        container.appendChild(row);
+      });
+
+      // Add event listeners for cost inputs
+      if (editMode) {
+        container.querySelectorAll('.cost-input[data-field="amount"]').forEach(input => {
+          input.addEventListener('change', (e) => {
+            const key = e.target.dataset.costKey;
+            costs[key].amount = parseFloat(e.target.value) || 0;
+            editedFields.costs[key] = true;
+            renderCostsTable();
+            updateCalculations();
+          });
+        });
+
+        container.querySelectorAll('.perperson-input').forEach(input => {
+          input.addEventListener('change', (e) => {
+            const key = e.target.dataset.costKey;
+            const perPerson = parseFloat(e.target.value) || 0;
+            const people = getPeopleCount(key);
+            costs[key].amount = Math.round(perPerson * people);
+            editedFields.costs[key] = true;
+            renderCostsTable();
+            updateCalculations();
+          });
+        });
+
+        container.querySelectorAll('.people-input').forEach(input => {
+          input.addEventListener('change', (e) => {
+            const key = e.target.dataset.costKey;
+            const newPeople = parseInt(e.target.value) || 1;
+            // Store custom people count
+            costs[key].customPeople = newPeople;
+            editedFields.costs[key] = true;
+            renderCostsTable();
+            updateCalculations();
+          });
+        });
+
+        container.querySelectorAll('.transfer-pct-input').forEach(input => {
+          input.addEventListener('change', (e) => {
+            const key = e.target.dataset.costKey;
+            const pct = (parseFloat(e.target.value) || 0) / 100;
+            costs[key].transferPct = Math.min(1, Math.max(0, pct));
+            // Recalculate amount based on new percentage
+            const people = Math.round(totalParticipants * costs[key].transferPct);
+            costs[key].amount = people * costs[key].perPersonRate;
+            editedFields.costs[key] = true;
+            renderCostsTable();
+            updateCalculations();
+          });
+        });
+      }
+    }
+
+    function renderDiscountsSection() {
+      const container = document.getElementById('discounts-section');
+      const totals = calculateTotals();
+
+      const earlyBirdPeople = Math.round(totalParticipants * discountRates.earlyBirdPct);
+      const repeatPeople = Math.round(totalParticipants * discountRates.repeatPct);
+
+      container.innerHTML = `
+        <div class="table-row${editedFields.discounts.earlyBirdPct ? ' edited-row' : ''}" style="border-top: 2px solid #d4c5b9; padding-top: 1rem;">
+          <div class="col-desc">
+            <p class="cost-desc">Early Bird Discount (assume 70%)</p>
+            <p class="discount-note">$100 off per person</p>
+          </div>
+          <div class="col-cost">
+            <span class="cost-value">${formatCurrency(totals.earlyBirdCost)}</span>
+          </div>
+          <div class="col-perperson">
+            <span class="cost-per-person">$100.00</span>
+          </div>
+          <div class="col-people">
+            ${editMode 
+              ? `<input type="number" step="0.01" min="0" max="1" class="cost-input discount-input" value="${discountRates.earlyBirdPct}" data-discount-key="earlyBirdPct">`
+              : `<span class="people-count">${earlyBirdPeople}/${totalParticipants}</span>`
+            }
+          </div>
+        </div>
+        <div class="table-row${editedFields.discounts.repeatPct ? ' edited-row' : ''}">
+          <div class="col-desc">
+            <p class="cost-desc">Repeat Attendee Discount (assume 57%)</p>
+            <p class="discount-note">$100 off per person</p>
+          </div>
+          <div class="col-cost">
+            <span class="cost-value">${formatCurrency(totals.repeatCost)}</span>
+          </div>
+          <div class="col-perperson">
+            <span class="cost-per-person">$100.00</span>
+          </div>
+          <div class="col-people">
+            ${editMode 
+              ? `<input type="number" step="0.01" min="0" max="1" class="cost-input discount-input" value="${discountRates.repeatPct}" data-discount-key="repeatPct">`
+              : `<span class="people-count">${repeatPeople}/${totalParticipants}</span>`
+            }
+          </div>
+        </div>
+      `;
+
+      // Add event listeners for discount inputs
+      if (editMode) {
+        container.querySelectorAll('.discount-input').forEach(input => {
+          input.addEventListener('change', (e) => {
+            const key = e.target.dataset.discountKey;
+            discountRates[key] = parseFloat(e.target.value) || 0;
+            editedFields.discounts[key] = true;
+            renderDiscountsSection();
+            updateCalculations();
+          });
+        });
+      }
+    }
+
+    function renderAccommodationsTable() {
+      const container = document.getElementById('accommodations-table');
+      container.innerHTML = '';
+
+      accommodations.forEach((acc, idx) => {
+        const isHeader = acc.isHeader;
+        const isSubItem = acc.isSubItem;
+        const isLastSubItem = acc.isLastSubItem;
+        const isEdited = editedFields.accommodations[idx];
+        const total = (acc.price && acc.count) ? acc.price * acc.count : null;
+
+        const row = document.createElement('div');
+        row.className = `table-row ${isHeader ? 'header-row' : ''} ${isSubItem ? 'sub-item-row' : ''} ${isLastSubItem ? 'last-sub-item-row' : ''} ${isEdited && !isHeader ? 'edited-row' : ''}`;
+        
+        // Format the name with bold name/asterisk and italic description
+        let formattedName = `<span class="acc-name-bold">${acc.name}</span>`;
+        if (acc.desc) {
+          formattedName += ` <span class="acc-name-italic">(${acc.desc})</span>`;
+        }
+
+        if (isHeader) {
+          row.innerHTML = `
+            <div class="col-acc-name">
+              <span class="acc-name">${formattedName}</span>
+            </div>
+            <div class="col-acc-price"></div>
+            <div class="col-acc-avg"></div>
+            <div class="col-acc-count"></div>
+            <div class="col-acc-total"></div>
+          `;
+        } else {
+          row.innerHTML = `
+            <div class="col-acc-name">
+              <span class="acc-name">${formattedName}</span>
+            </div>
+            <div class="col-acc-price">
+              ${editMode
+                ? `<input type="number" class="acc-input" value="${acc.price !== null ? acc.price : ''}" data-acc-idx="${idx}" data-acc-field="price">`
+                : `<span class="acc-value">${acc.price !== null ? formatCurrency(acc.price) : '—'}</span>`
+              }
+            </div>
+            <div class="col-acc-avg" style="color: #8b7859; font-size: 0.875rem;">
+              ${acc.price !== null ? formatCurrency(acc.price) : '—'}
+            </div>
+            <div class="col-acc-count">
+              ${editMode
+                ? `<input type="number" class="acc-input" value="${acc.count !== null ? acc.count : ''}" data-acc-idx="${idx}" data-acc-field="count">`
+                : `<span class="acc-value">${acc.count !== null ? acc.count : '—'}</span>`
+              }
+            </div>
+            <div class="col-acc-total">
+              <span class="cost-value" style="font-family: Georgia, serif;">${total !== null ? formatCurrency(total) : '—'}</span>
+            </div>
+          `;
+        }
+        container.appendChild(row);
+      });
+
+      // Add event listeners for accommodation inputs
+      if (editMode) {
+        container.querySelectorAll('.acc-input').forEach(input => {
+          input.addEventListener('change', (e) => {
+            const idx = parseInt(e.target.dataset.accIdx);
+            const field = e.target.dataset.accField;
+            const value = e.target.value === '' ? null : (field === 'price' ? parseFloat(e.target.value) : parseInt(e.target.value));
+            accommodations[idx][field] = value;
+            editedFields.accommodations[idx] = true;
+            updateCalculations();
+            renderAccommodationsTable();
+          });
+        });
+      }
+    }
+
+    function updateCalculations() {
+      const totals = calculateTotals();
+
+      // Update total cost display
+      document.getElementById('total-cost').textContent = formatCurrency(totals.totalCostWithDiscounts);
+      document.getElementById('per-person-cost').textContent = '$' + (totals.totalCostWithDiscounts / totalParticipants).toFixed(2);
+
+      // Update accommodation summary - show both averages: weighted avg (simple avg in smaller font)
+      document.getElementById('avg-price').innerHTML = '<span style="white-space: nowrap;">$' + totals.weightedAvgAccommodation.toFixed(0) + ' <span style="font-size: 0.8em; font-weight: normal;">($' + totals.avgAccommodation.toFixed(0) + '--avg/acc)</span></span>';
+      document.getElementById('total-count').textContent = totals.totalAccommodationCount;
+      document.getElementById('total-revenue').textContent = formatCurrency(totals.totalAccommodationRevenue);
+
+      // Update estimated revenue (based on accommodation selections) - FIRST
+      document.getElementById('estimated-revenue-acc').textContent = formatCurrency(totals.estimatedRevenueByAccommodation);
+      document.getElementById('revenue-formula-acc').textContent = 
+        `${formatCurrency(totals.totalAccommodationRevenue)} − ${formatCurrency(totals.totalCostWithDiscounts)}`;
+
+      // Update estimated revenue (based on participants) - SECOND
+      document.getElementById('estimated-revenue').textContent = formatCurrency(totals.estimatedRevenue);
+      const avgDiff = totals.avgAccommodation - totals.weightedAvgAccommodation;
+      document.getElementById('revenue-formula').textContent = 
+        `(${totals.avgAccommodation.toFixed(0)} × ${totalParticipants}) − ${formatCurrency(totals.totalCostWithDiscounts)}`;
+      document.getElementById('avg-diff-formula').textContent = 
+        `$${totals.avgAccommodation.toFixed(0)} − $${totals.weightedAvgAccommodation.toFixed(0)} = $${avgDiff.toFixed(0)}`;
+
+      // Re-render discounts to update calculated values
+      renderDiscountsSection();
+    }
+
+    function updateParticipantsDisplays() {
+      document.querySelectorAll('.section-participants-view').forEach(el => {
+        el.textContent = totalParticipants;
+      });
+      document.querySelectorAll('.section-participants-edit').forEach(el => {
+        el.value = totalParticipants;
+      });
+      
+      // Update participants badge edited state
+      document.querySelectorAll('.participants-badge').forEach(el => {
+        if (editedFields.participants) {
+          el.classList.add('edited');
+        } else {
+          el.classList.remove('edited');
+        }
+      });
+      
+      // Update goodies cost based on participants ($50/person)
+      costs.goodies.amount = totalParticipants * 50;
+      
+      // Update chef cost based on participants and tiered pricing (rate * participants * 7 days)
+      const chefRate = getChefPerPersonRate();
+      costs.catering.amount = chefRate * totalParticipants * 7;
+      
+      // Update transfer costs based on participants and percentages
+      Object.keys(costs).forEach(key => {
+        if (costs[key].isTransfer) {
+          const people = Math.round(totalParticipants * costs[key].transferPct);
+          costs[key].amount = people * costs[key].perPersonRate;
+        }
+      });
+    }
+
+    function toggleEditMode() {
+      editMode = !editMode;
+
+      // Update main edit button
+      const mainBtn = document.getElementById('main-edit-btn');
+      const btnText = document.getElementById('edit-btn-text');
+      mainBtn.className = `edit-btn ${editMode ? 'edit-mode' : 'view-mode'}`;
+      btnText.textContent = editMode ? 'Done' : 'Edit';
+
+      // Update section edit buttons
+      document.querySelectorAll('.section-edit-btn').forEach(btn => {
+        btn.className = `edit-btn ${editMode ? 'edit-mode' : 'view-mode'} section-edit-btn`;
+        btn.querySelector('span').textContent = editMode ? 'Done' : 'Edit';
+      });
+
+      // Toggle participant inputs
+      document.querySelectorAll('.section-participants-view').forEach(el => {
+        el.style.display = editMode ? 'none' : 'block';
+      });
+      document.querySelectorAll('.section-participants-edit').forEach(el => {
+        el.style.display = editMode ? 'block' : 'none';
+      });
+
+      // Re-render tables
+      renderCostsTable();
+      renderDiscountsSection();
+      renderAccommodationsTable();
+      updateCalculations();
+    }
+
+    function setupParticipantInputs() {
+      // Section participant inputs
+      document.querySelectorAll('.section-participants-edit').forEach(input => {
+        input.addEventListener('change', (e) => {
+          totalParticipants = parseInt(e.target.value) || 1;
+          editedFields.participants = true;
+          updateParticipantsDisplays();
+          renderCostsTable();
+          updateCalculations();
+        });
+      });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Clear any old localStorage data
+      localStorage.removeItem('retreatProposalState');
+      
+      // Priority: 1) URL state (for sharing specific configs), 2) Google Sheet (master), 3) Defaults
+      const hasUrlState = loadStateFromURL();
+      
+      if (!hasUrlState) {
+        // Try to load from Google Sheet
+        await loadFromGoogleSheet();
+      }
+      
+      // Update participant displays
+      updateParticipantsDisplays();
+      
+      renderCostsTable();
+      renderDiscountsSection();
+      renderAccommodationsTable();
+      updateCalculations();
+      setupParticipantInputs();
+    });
+  </script>
+</body>
+</html>
