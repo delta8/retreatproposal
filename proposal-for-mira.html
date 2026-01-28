@@ -1080,7 +1080,7 @@
   <script>
     // ========== GOOGLE SHEETS CONFIGURATION ==========
     // Replace this URL with your Google Apps Script Web App URL after deployment
-    const SCRIPT_URL = 'Yhttps://script.google.com/macros/s/AKfycbwCLP0KA9lE-UoKKyImY26odsC9s94oFl85eXJu-P-20ZncrbgCjdFGu1IFNuCJVtf8/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCLP0KA9lE-UoKKyImY26odsC9s94oFl85eXJu-P-20ZncrbgCjdFGu1IFNuCJVtf8/exec';
     
     // ========== STATE ==========
     let editMode = false;
@@ -2079,20 +2079,27 @@
 
     // Initialize
     document.addEventListener('DOMContentLoaded', async () => {
-      // Clear any old localStorage data
-      localStorage.removeItem('retreatProposalState');
-      
-      // Priority: 1) URL state (for sharing specific configs), 2) Google Sheet (master), 3) Defaults
-      const hasUrlState = loadStateFromURL();
-      
-      if (!hasUrlState) {
-        // Try to load from Google Sheet
-        await loadFromGoogleSheet();
+      try {
+        // Clear any old localStorage data
+        localStorage.removeItem('retreatProposalState');
+        
+        // Priority: 1) URL state (for sharing specific configs), 2) Google Sheet (master), 3) Defaults
+        const hasUrlState = loadStateFromURL();
+        
+        if (!hasUrlState && SCRIPT_URL !== 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+          // Try to load from Google Sheet only if configured
+          try {
+            await loadFromGoogleSheet();
+          } catch (e) {
+            console.log('Could not load from Google Sheet, using defaults:', e);
+          }
+        }
+      } catch (e) {
+        console.error('Error during initialization:', e);
       }
       
-      // Update participant displays
+      // Always render the page, even if loading failed
       updateParticipantsDisplays();
-      
       renderCostsTable();
       renderDiscountsSection();
       renderAccommodationsTable();
