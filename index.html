@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Retreat Proposal</title>
+  <!-- Lotus favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%238b7859'/%3E%3Cstop offset='100%25' style='stop-color:%235a4a3a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='48' fill='%23f5f1ed' stroke='%238b7859' stroke-width='2'/%3E%3Cpath d='M50 25 C50 25 35 40 35 55 C35 65 42 72 50 72 C58 72 65 65 65 55 C65 40 50 25 50 25' fill='url(%23g)' opacity='0.9'/%3E%3Cpath d='M50 30 C50 30 25 50 25 60 C25 70 35 75 50 75' fill='none' stroke='%238b7859' stroke-width='2' opacity='0.6'/%3E%3Cpath d='M50 30 C50 30 75 50 75 60 C75 70 65 75 50 75' fill='none' stroke='%238b7859' stroke-width='2' opacity='0.6'/%3E%3Ccircle cx='50' cy='52' r='4' fill='%23d4c5b9'/%3E%3C/svg%3E">
   <style>
     * {
       margin: 0;
@@ -223,6 +225,24 @@
       background: #3367d6;
     }
 
+    .sync-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.25rem;
+      font-size: 1.15rem;
+      border: 1px solid #34a853;
+      background: #34a853;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sync-btn:hover {
+      background: #2d8e47;
+    }
+
     /* Print styles */
     @media print {
       body {
@@ -232,7 +252,7 @@
         font-size: 9px !important;
       }
 
-      .edit-btn, .reset-btn, .pdf-btn, .link-btn, .sheet-btn, .section-edit-btn {
+      .edit-btn, .reset-btn, .pdf-btn, .link-btn, .sheet-btn, .sync-btn, .section-edit-btn {
         display: none !important;
       }
 
@@ -954,6 +974,15 @@
           </svg>
           <span>Save to Sheet</span>
         </button>
+        <button class="sync-btn" onclick="syncFromSheet()">
+          <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 2v6h-6"></path>
+            <path d="M3 12a9 9 0 0 1 15-6.7L21 8"></path>
+            <path d="M3 22v-6h6"></path>
+            <path d="M21 12a9 9 0 0 1-15 6.7L3 16"></path>
+          </svg>
+          <span>Sync from Sheet</span>
+        </button>
         <button class="reset-btn" onclick="showSettings()" title="Configure Google Sheets URLs">
           <span>⚙️</span>
         </button>
@@ -1084,8 +1113,9 @@
     // ========== GOOGLE SHEETS CONFIGURATION ==========
     // READ URL: The googleusercontent redirect URL (for reading via JSONP)
     // WRITE URL: The original script.google.com URL (for writing)
-    let API_URL = localStorage.getItem('retreatApiUrl') || '';
-    let WRITE_URL = localStorage.getItem('retreatWriteUrl') || '';
+    const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxS4R362VeqNK9HeXXwSMeahdVQRF-Z5XWdeCLTBfzRvUKf8BzciPYWK77QOqQwJuln/exec';
+    let API_URL = localStorage.getItem('retreatApiUrl') || DEFAULT_SCRIPT_URL;
+    let WRITE_URL = localStorage.getItem('retreatWriteUrl') || DEFAULT_SCRIPT_URL;
     
     // ========== STATE ==========
     let editMode = false;
@@ -1548,6 +1578,22 @@
         console.error('Error loading from Google Sheet:', error);
         hideLoadingIndicator();
         return false;
+      }
+    }
+    
+    // Sync from Sheet - user-triggered load with UI feedback
+    async function syncFromSheet() {
+      const loaded = await loadFromGoogleSheet();
+      if (loaded) {
+        // Re-render everything with new data
+        updateParticipantsDisplays();
+        renderCostsTable();
+        renderDiscountsSection();
+        renderAccommodationsTable();
+        updateCalculations();
+        alert('Synced from Google Sheet successfully!');
+      } else {
+        alert('Failed to sync from Google Sheet. Check console for details.');
       }
     }
     
